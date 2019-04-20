@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<DQID id="LZDQ_Miniproduction_16">
+  <META>
+    <SIMDATA>SIMULATION</SIMDATA>
+    <STARTDAY>20190418</STARTDAY>
+    <STARTTIME>12:17:39</STARTTIME>
+    <ENDDAY>20190418</ENDDAY>
+    <ENDTIME>12:17:40</ENDTIME>
+    <TAG>BKG</TAG>
+  </META>
+  <SUBDET id="TPCHG" flag="Red">
+    <PAR id="pulseArea_phd" obj="h1" overlap="yes" drawoption="default" flag="Yellow">
+      <ALG name="MEAN">
+        <VALUE>100.52</VALUE>
+        <LOW2>66.76</LOW2>
+        <LOW>76.76</LOW>
+        <HIGH>96.76</HIGH>
+        <HIGH2>106.76</HIGH2>
+        <FLAG>Yellow</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>107.38</VALUE>
+        <LOW2>86.80</LOW2>
+        <LOW>96.80</LOW>
+        <HIGH>116.80</HIGH>
+        <HIGH2>126.80</HIGH2>
+        <FLAG>Green</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="peakTime_ns" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE>458.18</VALUE>
+        <LOW2>440.60</LOW2>
+        <LOW>450.60</LOW>
+        <HIGH>470.60</HIGH>
+        <HIGH2>480.60</HIGH2>
+        <FLAG>Green</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>506.84</VALUE>
+        <LOW2>531.80</LOW2>
+        <LOW>541.80</LOW>
+        <HIGH>561.80</HIGH>
+        <HIGH2>571.80</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="coincidence" obj="h1" overlap="yes" drawoption="default" flag="Yellow">
+      <ALG name="MEAN">
+        <VALUE>204.91</VALUE>
+        <LOW2>171.00</LOW2>
+        <LOW>181.00</LOW>
+        <HIGH>201.00</HIGH>
+        <HIGH2>211.00</HIGH2>
+        <FLAG>Yellow</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>137.94</VALUE>
+        <LOW2>131.00</LOW2>
+        <LOW>141.00</LOW>
+        <HIGH>161.00</HIGH>
+        <HIGH2>171.00</HIGH2>
+        <FLAG>Yellow</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="s2yVSs2x" obj="h2" overlap="no" drawoption="colz" flag="Undefined">
+      <ALG name="N/A">
+        <VALUE>N/A</VALUE>
+        <LOW2>N/A</LOW2>
+        <LOW>N/A</LOW>
+        <HIGH>N/A</HIGH>
+        <HIGH2>N/A</HIGH2>
+        <FLAG>Undefined</FLAG>
+      </ALG>
+    </PAR>
+  </SUBDET>
+  <SUBDET id="TPCLG" flag="Red">
+    <PAR id="pulseArea_phd" obj="h1" overlap="yes" drawoption="default" flag="Green">
+      <ALG name="MEAN">
+        <VALUE>86.59</VALUE>
+        <LOW2>66.76</LOW2>
+        <LOW>76.76</LOW>
+        <HIGH>96.76</HIGH>
+        <HIGH2>106.76</HIGH2>
+        <FLAG>Green</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>100.24</VALUE>
+        <LOW2>86.80</LOW2>
+        <LOW>96.80</LOW>
+        <HIGH>116.80</HIGH>
+        <HIGH2>126.80</HIGH2>
+        <FLAG>Green</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="peakTime_ns" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE>432.62</VALUE>
+        <LOW2>440.60</LOW2>
+        <LOW>450.60</LOW>
+        <HIGH>470.60</HIGH>
+        <HIGH2>480.60</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>505.58</VALUE>
+        <LOW2>531.80</LOW2>
+        <LOW>541.80</LOW>
+        <HIGH>561.80</HIGH>
+        <HIGH2>571.80</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="coincidence" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE>128.04</VALUE>
+        <LOW2>171.00</LOW2>
+        <LOW>181.00</LOW>
+        <HIGH>201.00</HIGH>
+        <HIGH2>211.00</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>128.56</VALUE>
+        <LOW2>131.00</LOW2>
+        <LOW>141.00</LOW>
+        <HIGH>161.00</HIGH>
+        <HIGH2>171.00</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="s2yVSs2x" obj="h2" overlap="no" drawoption="colz" flag="Undefined">
+      <ALG name="N/A">
+        <VALUE>N/A</VALUE>
+        <LOW2>N/A</LOW2>
+        <LOW>N/A</LOW>
+        <HIGH>N/A</HIGH>
+        <HIGH2>N/A</HIGH2>
+        <FLAG>Undefined</FLAG>
+      </ALG>
+    </PAR>
+  </SUBDET>
+  <SUBDET id="Skin" flag="Red">
+    <PAR id="pulseArea_phd" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE>11.49</VALUE>
+        <LOW2>66.76</LOW2>
+        <LOW>76.76</LOW>
+        <HIGH>96.76</HIGH>
+        <HIGH2>106.76</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>18.97</VALUE>
+        <LOW2>86.80</LOW2>
+        <LOW>96.80</LOW>
+        <HIGH>116.80</HIGH>
+        <HIGH2>126.80</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="peakTime_ns" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE>38.94</VALUE>
+        <LOW2>440.60</LOW2>
+        <LOW>450.60</LOW>
+        <HIGH>470.60</HIGH>
+        <HIGH2>480.60</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>29.58</VALUE>
+        <LOW2>531.80</LOW2>
+        <LOW>541.80</LOW>
+        <HIGH>561.80</HIGH>
+        <HIGH2>571.80</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="coincidence" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE> 1.79</VALUE>
+        <LOW2>171.00</LOW2>
+        <LOW>181.00</LOW>
+        <HIGH>201.00</HIGH>
+        <HIGH2>211.00</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE> 5.16</VALUE>
+        <LOW2>131.00</LOW2>
+        <LOW>141.00</LOW>
+        <HIGH>161.00</HIGH>
+        <HIGH2>171.00</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+  </SUBDET>
+  <SUBDET id="ODHG" flag="Red">
+    <PAR id="pulseArea_phd" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE> 1.37</VALUE>
+        <LOW2>66.76</LOW2>
+        <LOW>76.76</LOW>
+        <HIGH>96.76</HIGH>
+        <HIGH2>106.76</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE> 2.45</VALUE>
+        <LOW2>86.80</LOW2>
+        <LOW>96.80</LOW>
+        <HIGH>116.80</HIGH>
+        <HIGH2>126.80</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="peakTime_ns" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE>65.43</VALUE>
+        <LOW2>440.60</LOW2>
+        <LOW>450.60</LOW>
+        <HIGH>470.60</HIGH>
+        <HIGH2>480.60</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>127.47</VALUE>
+        <LOW2>531.80</LOW2>
+        <LOW>541.80</LOW>
+        <HIGH>561.80</HIGH>
+        <HIGH2>571.80</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="coincidence" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE> 1.70</VALUE>
+        <LOW2>171.00</LOW2>
+        <LOW>181.00</LOW>
+        <HIGH>201.00</HIGH>
+        <HIGH2>211.00</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE> 1.25</VALUE>
+        <LOW2>131.00</LOW2>
+        <LOW>141.00</LOW>
+        <HIGH>161.00</HIGH>
+        <HIGH2>171.00</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="ZvsPhi" obj="h2" overlap="no" drawoption="colz" flag="Undefined">
+      <ALG name="N/A">
+        <VALUE>N/A</VALUE>
+        <LOW2>N/A</LOW2>
+        <LOW>N/A</LOW>
+        <HIGH>N/A</HIGH>
+        <HIGH2>N/A</HIGH2>
+        <FLAG>Undefined</FLAG>
+      </ALG>
+    </PAR>
+  </SUBDET>
+  <SUBDET id="ODLG" flag="Red">
+    <PAR id="pulseArea_phd" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE> 0.98</VALUE>
+        <LOW2>66.76</LOW2>
+        <LOW>76.76</LOW>
+        <HIGH>96.76</HIGH>
+        <HIGH2>106.76</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE> 1.94</VALUE>
+        <LOW2>86.80</LOW2>
+        <LOW>96.80</LOW>
+        <HIGH>116.80</HIGH>
+        <HIGH2>126.80</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="peakTime_ns" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE>43.44</VALUE>
+        <LOW2>440.60</LOW2>
+        <LOW>450.60</LOW>
+        <HIGH>470.60</HIGH>
+        <HIGH2>480.60</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE>100.38</VALUE>
+        <LOW2>531.80</LOW2>
+        <LOW>541.80</LOW>
+        <HIGH>561.80</HIGH>
+        <HIGH2>571.80</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="coincidence" obj="h1" overlap="yes" drawoption="default" flag="Red">
+      <ALG name="MEAN">
+        <VALUE> 1.29</VALUE>
+        <LOW2>171.00</LOW2>
+        <LOW>181.00</LOW>
+        <HIGH>201.00</HIGH>
+        <HIGH2>211.00</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+      <ALG name="StD">
+        <VALUE> 1.04</VALUE>
+        <LOW2>131.00</LOW2>
+        <LOW>141.00</LOW>
+        <HIGH>161.00</HIGH>
+        <HIGH2>171.00</HIGH2>
+        <FLAG>Red</FLAG>
+      </ALG>
+    </PAR>
+    <PAR id="ZvsPhi" obj="h2" overlap="no" drawoption="colz" flag="Undefined">
+      <ALG name="N/A">
+        <VALUE>N/A</VALUE>
+        <LOW2>N/A</LOW2>
+        <LOW>N/A</LOW>
+        <HIGH>N/A</HIGH>
+        <HIGH2>N/A</HIGH2>
+        <FLAG>Undefined</FLAG>
+      </ALG>
+    </PAR>
+  </SUBDET>
+  <SUBDET id="Global" flag="Green">
+    <PAR id="triggerRate" obj="h1" overlap="no" drawoption="default" flag="Undefined">
+      <ALG name="SpikeFinder">
+        <VALUE>N/A</VALUE>
+        <LOW2>N/A</LOW2>
+        <LOW>N/A</LOW>
+        <HIGH>N/A</HIGH>
+        <HIGH2>N/A</HIGH2>
+        <FLAG>Undefined</FLAG>
+      </ALG>
+    </PAR>
+  </SUBDET>
+</DQID>

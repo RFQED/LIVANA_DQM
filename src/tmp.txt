@@ -1,0 +1,202 @@
+#include "MDC3Plots.h"
+#include "Event.h"
+#include "Cuts.h"
+#include "HistSvc.h"
+#include "Logger.h"
+
+#include <iostream>
+
+using namespace std;
+
+MDC3Plots::MDC3Plots():
+  Analysis()
+{
+  // Constructor
+}
+
+MDC3Plots::~MDC3Plots() {
+  // Destructor
+}
+
+void MDC3Plots::Initialize() {
+  // Called before event lopp
+}
+
+
+void MDC3Plots::Execute() {
+  // Called once per event
+
+  // Access variables through Event functions (preferred)
+  VERBOSE("NInteractions ", m_event->NInteractions());
+  
+  // Direct access to RQ variables (for testing)
+  VERBOSE("N HG TPC Pulses ",  m_event->m_tpcHGPulses->nPulses);
+
+
+  double start = 99999999999.;
+  if (m_event->EventTime()<start) start = m_event->EventTime();
+
+  double end = 0.;
+  if (m_event->EventTime()>end) end = m_event->EventTime();
+
+  // 1D Hist
+  //m_hists->BookFillHist("NHGPulses", 50, 0., 50., m_event->m_tpcHGPulses->nPulses);
+  //bool neutron = false;
+
+  int S1PulseIDInEvent = 0;
+  float S1PulseArea = 0;
+  float TPCTime = 0.0;
+  float TPCPeakTime = 0.0;
+  float ODTime = 0.0;
+  float ODPeakTime = 0.0;
+  float ODTimeWithCut = 0.0;
+  float TotalPulseArea = 0.;
+  float TotalTPCPulseArea = 0.;
+  int NChannels = m_event->m_odHGPulses->chID.size();
+  float LargestPulseArea = 0.0;
+  int LargestPulse = 0;
+
+  for (int i = 0; i < m_event->m_odHGPulses->nPulses; i++){
+    //int NChannels = m_event->m_odHGPulses->chID().size();
+    if (m_event->ODPulseArea().at(i) > LargestPulseArea){
+      LargestPulseArea = m_event->ODPulseArea().at(i);
+      LargestPulse = i;
+    }
+    //       if (m_event->ODPulseArea().at(i) > 1){
+    //m_hists->BookFillHist("ODPulseArea", 100, 0.0, 500.0, m_event->ODPulseArea()[i]);
+    //}
+    
+       //  if (NChannels >5)
+    TotalPulseArea = TotalPulseArea + m_event->ODPulseArea()[i];
+
+    //    if (m_event->ODPulseArea().at(i) > 20 /*&& m_event->ODPulseArea().at(i) < 100*/ && ODTime == 0.0){    
+    //ODTime = m_event->ODStartTime()[i];
+    //}
+
+    //if (m_event->ODPulseArea().at(i) > 320 /*&& m_event->ODPulseArea().at(i) < 100*/ && ODTimeWithCut == 0.0){    
+    //ODTimeWithCut = m_event->ODStartTime()[i];
+    //}
+
+    //if (m_event->ODPulseArea().at(i) > 440){
+      //m_hists->BookFillHist("ODPulsePeakTime", 100, 0.0, 500.0, m_event->ODStartTime()[i]);
+      //neutron = true;
+    //}
+  }
+
+
+
+  
+  double timediff = 0;
+  for (int i = 0; i < m_event->m_tpcHGPulses->nPulses; i++){
+    for (int j = 0; j < m_event->m_odHGPulses->nPulses; j++){
+      timediff = m_event->TPCPeakTime().at(i) - m_event->ODPeakTime().at(j);
+      m_hists->BookFillHist("TimeDiff", 1000, -1000., 1000., LargestPulseArea);
+    }
+  }
+  
+  for (int i = 0; i < m_event->m_tpcHGPulses->nPulses; i++){
+    TotalTPCPulseArea = TotalTPCPulseArea + m_event->TPCPulseArea()[i];
+  }
+
+  if(NChannels>5){
+  //if (TotalPulseArea > 1)
+    //m_hists->BookFillHist("ODTotalPulseArea", 100, 0.0, 2000.0, TotalPulseArea);
+    //m_hists->BookFillHist("ODTotalPulseArea2.6", 100, 250.0, 350.0, TotalPulseArea);
+    m_hists->BookFillHist("ODLargestPulseArea", 100, 0., 1500., LargestPulseArea);
+
+    if (TotalPulseArea >320){
+      //m_hists->BookFillHist("ODTotalPulseArea>320phd", 100, 0.0, 2000.0, TotalPulseArea);
+    }
+   }
+
+  if (TotalTPCPulseArea > 1){
+    //m_hists->BookFillHist("TPCTotalPulseArea", 100, 0.0, 80000.0, TotalTPCPulseArea);
+  }
+
+  if (LargestPulseArea != 0){
+    ODTime = m_event->ODStartTime().at(LargestPulse);
+    ODPeakTime = m_event->ODPeakTime().at(LargestPulse);
+  }
+  if (LargestPulseArea > 440 && NChannels>5){
+    //ODTimeWithCut = m_event->ODStartTime().at(LargestPulse);
+    m_hists->BookFillHist("ODLargestPulseArea>440", 100, 0., 1400., LargestPulseArea);
+  }
+
+  for (int i = 0; i < m_event->m_tpcHGPulses->nPulses; i++){
+
+    if (m_event->m_tpcHGPulses->s1Probability.at(i) == 1. && TPCTime ==0.0){
+      TPCTime = m_event->TPCStartTime().at(i);
+      TPCPeakTime = m_event->TPCPeakTime().at(i);
+      S1PulseArea = m_event->TPCPulseArea().at(i);
+      S1PulseIDInEvent = i;
+      m_hists->BookFillHist("TPCS1PulseArea", 100, 0.0, 30000.0, m_event->TPCPulseArea().at(i));
+
+    }
+  }
+  // if(NChannels>5){
+  if ((ODTime - TPCTime) < -160 && (ODTime - TPCTime) > -280 && ODTime != 0 && TPCTime !=0.0){
+    if(NChannels>5){
+      //m_hists->BookFillHist("ODTotalPulseAreaTimeDiff200", 100, 0.0, 2000.0, TotalPulseArea);
+    }
+    if (TotalTPCPulseArea > 1){
+      //m_hists->BookFillHist("TPCTotalPulseAreaTimeDiff200", 100, 0.0, 80000.0, TotalTPCPulseArea);
+    }
+  }
+  if (ODTime != 0 && TPCTime !=0.0 && NChannels>5){
+    m_hists->BookFillHist("ODLargestPulseArea(WithTPCPulse)", 100, 0., 1500., LargestPulseArea);
+    m_hists->BookFillHist("StartTimeDifference", 100, -500000, 700000, (ODTime - TPCTime));
+    m_hists->BookFillHist("TimeDifferenceZoomed", 100, -400, 400, ((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)));
+    m_hists->BookFillHist("PeakTimeDifference", 100, -500000, 700000, ((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)));
+    m_hists->BookFillHist("TPCXPosition", 100, -150.0, 150.0, m_event->m_tpcHGPulses->s2Xposition_cm.at(S1PulseIDInEvent));
+    //m_hists->BookFillHist("TimeDifferenceVsS1PulseWidth", 100, -100, 700, 100, 0.0, 500.0, (ODTime - TPCTime), m_event->m_tpcHGPulses->rmsWidth_ns.at(S1PulseIDInEvent));
+    //m_hists->BookFillHist("TimeDifferenceVsS1AreaFractionTime5", 100, -100, 700, 100, 0.0, 600.0, (ODTime - TPCTime), m_event->m_tpcHGPulses->areaFractionTime5_ns.at(S1PulseIDInEvent));
+    //m_hists->BookFillHist("TimeDifferenceVsS1AreaFractionTime50", 100, -100, 700, 100, 0.0, 700.0, (ODTime - TPCTime), m_event->m_tpcHGPulses->areaFractionTime50_ns.at(S1PulseIDInEvent));
+    //m_hists->BookFillHist("TimeDifferenceVsS1AreaFractionTime95", 100, -100, 700, 100, 0.0, 900.0, (ODTime - TPCTime), m_event->m_tpcHGPulses->areaFractionTime95_ns.at(S1PulseIDInEvent));
+    //m_hists->BookFillHist("TimeDifferenceVsXPosition", 100, -100, 700, 100, -150.0, 150.0, (ODTime - TPCTime), m_event->m_tpcHGPulses->s2Xposition_cm.at(S1PulseIDInEvent));
+    //m_hists->BookFillHist("TimeDifferenceVsTBAsymmetry", 100, -100, 700, 100, -1.2, 1.2, (ODTime - TPCTime), m_event->m_tpcHGPulses->topBottomAsymmetry.at(S1PulseIDInEvent));
+    m_hists->BookFillHist("TimeDifferenceVsODPulseArea", 100, -500000, 700000, 100, 0.0, 1400.0, ((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)), LargestPulseArea);//, m_event->m_event->eventID);
+    m_hists->BookFillHist("TimeDifferenceVsS1PulseArea", 100, -500000, 700000, 100, 0.0, 30000.0, ((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)), S1PulseArea);//, m_event->m_event->eventID);
+    //m_hists->BookFillHist("TimeDifferenceVsS1PulseHeight", 100, -100, 700, 100, 0.0, 100.0, (ODTime - TPCTime), m_event->m_tpcHGPulses->peakAmp.at(S1PulseIDInEvent));
+    m_hists->BookFillHist("TimeDifferenceVsPulseAreaRatio", 100, -500000, 700000, 100, 0.0, 200.0, (ODTime - TPCTime), S1PulseArea/LargestPulseArea);
+    //m_hists->BookFillHist("TimeDifferenceVsEventTime", 100, -100, 700, 100, start, end, (ODTime - TPCTime), m_event->EventTime());
+    //m_hists->BookFillHist("TimeDifferenceVsTPCTime", 100, -100, 700, 100, 400, 1000, (ODTime - TPCTime), TPCTime, m_event->m_event->eventID);
+    //m_hists->BookFillHist("TimeDifferenceVsTPCEndTime", 100, -100, 700, 100, 400, 4000, (ODTime - TPCTime), m_event->m_tpcHGPulses->pulseEndTime_ns.at(S1PulseIDInEvent));
+    //m_hists->BookFillHist("TimeDifferenceVsTPCPeakTime", 100, -100, 700, 100, 900, 1200, (ODTime - TPCTime), TPCPeakTime+TPCTime);
+    //m_hists->BookFillHist("TimeDifferenceVsODTime", 100, -100, 700, 100, 600, 1200, (ODTime - TPCTime), ODTime, m_event->m_event->eventID);
+    //m_hists->BookFillHist("TimeDifferenceVsODPeakTime", 100, -100, 700, 100, 600, 1200, (ODTime - TPCTime), ODPeakTime+ODTime);
+    //m_hists->BookFillHist("TimeDifferenceVsEventTimeZoomed", 100, -100, 700, 100, start, start+1000, (ODTime - TPCTime), m_event->EventTime());.
+    m_hists->BookFillHist("S1PulseAreaVsODPulseArea", 100, 0, 30000.0, 100, 0.0, 1400.0, S1PulseArea, LargestPulseArea);//, m_event->m_event->eventID);
+    //if (TPCTime > 500 && TPCTime < 600 && (ODTime - TPCTime) > -100 && (ODTime - TPCTime) ) {
+    if (TMath::Abs((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)) > 500) {
+    m_hists->BookFillHist("S1PulseAreaVsODPulseArea(WithTimeDiffCut)", 100, 0, 30000.0, 100, 0.0, 1400.0, S1PulseArea, LargestPulseArea);//, m_event->m_event->eventID);
+    }
+  }
+
+if (ODTime != 0 && TPCTime !=0.0 && NChannels>5 && m_event->m_singleScatters->nSingleScatters == 1){
+    m_hists->BookFillHist("SSTimeDifference", 100, -500000, 700000, ((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)));
+    m_hists->BookFillHist("SSODPulseArea", 100, 0.0, 1400.0, LargestPulseArea);
+    m_hists->BookFillHist("SSTimeDifferenceVsSSODPulseArea", 100, -500000, 700000, 100, 0.0, 1400.0, ((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)), LargestPulseArea);//, m_event->m_event->eventID);
+    m_hists->BookFillHist("Abs(SSTimeDifference)VsSSODPulseArea", 100, 0, 700000, 100, 0.0, 1400.0, TMath::Abs((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)), LargestPulseArea);//, m_event->m_event->eventID);
+
+    for (int i=0; i<100; i++){
+      if (LargestPulseArea > (i*14)){
+	m_hists->BookFillHist("Threshold", 100, 0.0, 1400.0,(i*14));
+      }
+      for (int j=0; j<100; j++){
+	if (TMath::Abs((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)) < (j*7000) && LargestPulseArea > (i*14)){
+	  m_hists->BookFillHist("ThresholdVsWindowLength", 100, 0, 700000, 100, 0.0, 1400.0, (j*7000) ,(i*14));
+	}	  
+	if (TMath::Abs((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)) < (j*7000) && LargestPulseArea > (i*4)){
+	  m_hists->BookFillHist("ThresholdVsWindowLengthZoomed", 100, 0, 400000, 100, 0.0, 400.0, (j*4000) ,(i*4));
+	}
+      }
+      if (TMath::Abs((ODPeakTime+ODTime) - (TPCPeakTime+TPCTime)) < (i*7000)) m_hists->BookFillHist("WindowLength", 100, 0., 700000., (i*7000));
+    }
+
+ }
+}
+
+void MDC3Plots::Finalize() {
+  // Called after event loop
+}
+
