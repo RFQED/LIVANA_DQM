@@ -22,7 +22,6 @@
  
 void dqplots(char* filename, int fnum);
 
-// for 20, 25, 30, 35, 40, 45 ns trigger widths
 void dqplots(char* filename, int fnum)
 {
 

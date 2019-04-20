@@ -43,11 +43,9 @@ void readaddxmldq(const char* file1 = "example.xml", const char* file2 = "exampl
 	 XMLNodePointer_t metachild = xml->GetChild(meta);
 	 printf("adding meta node: %s\n",xml->GetNodeName(metachild));
 	 xml->AddChild(metaadded,metachild);
-	 //	 break;
        }
        if (strncmp(xml->GetNodeName(meta),"SUBDET",6) == 0){
 	 printf("snode: %s\n",xml->GetNodeName(meta));
-	 //	 break;
        }
        meta = xml->GetNext(meta);
      }
