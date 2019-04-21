@@ -4,6 +4,9 @@
 #include <TH1F.h>
 #include <TH2F.h>
 
+#include <TCanvas.h>
+#include <TImage.h>
+
 #include <utility>
 using std::pair;
 #include <sstream>
@@ -34,12 +37,11 @@ HistSvc::~HistSvc() {
 void HistSvc::SetPrefix(string prefix) {
    m_prefix = prefix;
 }
+
 void HistSvc::SetDir(string dir) {
    m_dir = dir;
    if(dir !="") m_dir += "/";
 }
-
-
 
 void HistSvc::SetSysName(string sysname) {
   bool nodir=false;
@@ -100,10 +102,11 @@ TH1* HistSvc::FindHistInMap(const string& name){
   //  string hname = histName(name);
   try {
     hist=m_hists.at(name);
-  } catch (const std::out_of_range& oor) {
+  }
+  catch (const std::out_of_range& oor) {
     return 0;
   }
-
+  
 //   string dir   = dirName(name);    
 //   string hname = histName(name);
 // 
@@ -162,6 +165,7 @@ void HistSvc::BookFillHist(const string& name, int nbinsx, float xlow, float xup
     BookHist(name, nbinsx, xlow, xup)->Fill(value, weight);
   }
 }
+
 
 TH1* HistSvc::BookHist(const string& name, int nbinsx, float* xbins) {
 
@@ -496,3 +500,25 @@ void HistSvc::SetWeightSysts(vector<float>& weightsyst){
   m_weightsyst= weightsyst;
   m_nweightsyst=m_weightsyst.size();
 }
+
+void HistSvc::WritePNGs(){
+  
+  std::cout << "size of m_hists " << m_hists.size() << "\n";
+
+  for ( auto & map_entry : m_hists) {
+    TCanvas *c = new TCanvas;
+    string name =  map_entry.first;
+    TH1* hist = map_entry.second;
+	
+    string histname = hist->GetName();
+    string histnamepng = histname + ".png";
+    hist->Draw();
+
+    TImage *img = TImage::Create();
+    //
+    img->FromPad(c);
+    img->WriteImage(histnamepng.c_str());
+  }
+  
+}
+
