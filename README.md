@@ -1,16 +1,6 @@
 # LIVLZ
 
-Liverpool group LZ Analysis code, which is fully compiled code using automake to work out dependencies and requires common rqlib
-
-Others are welcome to use this too and in the future the individual analyses (e.g. `MyAnalysis`) will be split into a spearate pkg from the framework
-
-# Checkout
-
-```
-git clone git@lz-git.ua.edu:analysis/MDC2Analysis.git
-cd MDC2Analysis
-git checkout liv
-```
+Version of the Liverpool group LZ Analysis code merged in with the development DQM, which is fully compiled code using automake to work out dependencies and requires common rqlib
 
 # Structure
 
@@ -26,6 +16,8 @@ The package has the following elements:
 * `scripts`: shell scripts
 * `python`: python scripts
 * `inputs`: input file lists
+* `dqm` : code to produce root files and pngs of plots to display in DQM as well as required xml data
+* `dqm_display` : code to produce a web site to display the generated root files throigh JSRoot
 * `Makefile` 
 
 # Components
