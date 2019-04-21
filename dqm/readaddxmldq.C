@@ -5,6 +5,7 @@ void readaddxmldq(const char* file1 = "example.xml", const char* file2 = "exampl
 {
    // First create engine
    TXMLEngine* xml = new TXMLEngine;
+
    // Now try to parse xml file
    // Only file with restricted xml syntax are supported
    XMLDocPointer_t xmldoc1 = xml->ParseFile(file1);
@@ -12,12 +13,14 @@ void readaddxmldq(const char* file1 = "example.xml", const char* file2 = "exampl
       delete xml;
       return;
    }
+
    // take access to main node
    XMLDocPointer_t xmldoc2 = xml->ParseFile(file2);
    if (xmldoc2==0) {
       delete xml;
       return;
    }
+
    // take access to main node
    XMLNodePointer_t mainnode1 = xml->DocGetRootElement(xmldoc1);
    // display recursively all nodes and subnodes
@@ -63,31 +66,5 @@ void readaddxmldq(const char* file1 = "example.xml", const char* file2 = "exampl
    // // Save document to file
    xml->SaveDoc(xmldoc3, output);
 
-//     xml->FreeDoc(xmldoc1);
-//     xml->FreeDoc(xmldoc2);
-//    xml->FreeDoc(xmldoc3);
    delete xml;
 }
-
-   // // this function display all accessible information about xml node and its children
-   // printf("%*c node: %s\n",level,' ', xml->GetNodeName(node));
-   // // display namespace
-   // XMLNsPointer_t ns = xml->GetNS(node);
-   // if (ns!=0)
-   //    printf("%*c namespace: %s refer: %s\n",level+2,' ', xml->GetNSName(ns), xml->GetNSReference(ns));
-   // // display attributes
-   // XMLAttrPointer_t attr = xml->GetFirstAttr(node);
-   // while (attr!=0) {
-   //     printf("%*c attr: %s value: %s\n",level+2,' ', xml->GetAttrName(attr), xml->GetAttrValue(attr));
-   //     attr = xml->GetNextAttr(attr);
-   // }
-   // // display content (if exists)
-   // const char* content = xml->GetNodeContent(node);
-   // if (content!=0)
-   //    printf("%*c cont: %s\n",level+2,' ', content);
-   // // display all child nodes
-   // XMLNodePointer_t child = xml->GetChild(node);
-   // while (child!=0) {
-   //    DisplayNode(xml, child, level+2);
-   //    child = xml->GetNext(child);
-   // }

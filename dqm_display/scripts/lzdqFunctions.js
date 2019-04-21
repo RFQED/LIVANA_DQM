@@ -42,7 +42,7 @@ function loadDoc() {
       createTable(this);
       }
   };
-  xhttp.open("GET", "runs/testdqsets.xml", true);
+  xhttp.open("GET", "runs/dqsets.xml", true);
   xhttp.send();
 }
 
