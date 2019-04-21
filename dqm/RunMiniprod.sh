@@ -13,7 +13,7 @@ for rootfile in /bundle/data/LZ/MDC3_miniProduction/lz_Miniproduction_1?_lzap.ro
 
   root -l -b -q ./dqplots.C+(\"$rootfile\",$((10#$fileIDNum))) 
   root -l -b -q ./readaddxmldq.C+(\"dqsets.xml\",\"$dataSetMetaData\",\"dqsets.xml\")
-  root -l -b -q ./readaddxmldq.C+(\"refdq.xml\",\"$dataSetMetaData\",\"refdq.xml\")
+  root -l -b -q ./readaddxmldq.C+(\"refdqsets.xml\",\"$dataSetMetaData\",\"refdqsets.xml\")
 
 done;
 

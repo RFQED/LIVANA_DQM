@@ -85,7 +85,7 @@ function loadRefDQfromXML() {
       createSelect(this);
       }
   };
-  xhttp.open("GET", "runs/refdq.xml", true);
+  xhttp.open("GET", "runs/refdqsets.xml", true);
   xhttp.send();
 }
 
