@@ -529,15 +529,47 @@ void HistSvc::WritePNGs(){
     img->WriteImage(histnamepng.c_str());
   }
 }
-  void HistSvc::WriteHistsXML(){
 
-    // First create engine
-    TXMLEngine* xml = new TXMLEngine;
-    // Create main node of document tree
-    XMLNodePointer_t dqid = xml->NewChild(0, 0, "DQID");
+void HistSvc::WriteHistsXML(){
+  // some where in here loop over the hists 
+  
+  // current date/time based on current system
+  time_t now = time(0);
+  
+  // convert now to tm struct for UTC
+  tm *gmtm = gmtime(&now);
+  
+  char strday[20];
+  char strtime[20];
+  sprintf(strday,"%04d%02d%02d",gmtm->tm_year+1900,gmtm->tm_mon+1,gmtm->tm_mday);
+  sprintf(strtime,"%02d:%02d:%02d",gmtm->tm_hour,gmtm->tm_min,gmtm->tm_sec);
+  
+  // First create engine
+  TXMLEngine* xml = new TXMLEngine;
+  // Create main node of document tree
+  XMLNodePointer_t dqid = xml->NewChild(0, 0, "DQID");
+  
+  char cdir[100];
+  int fnum = 99;
+  sprintf(cdir,"LZDQ_Miniproduction_%d",fnum);
+  
+  char fullxml[200];
+  sprintf(fullxml,"dqsetmeta_%d.xml",fnum);
+  
+  xml->NewAttr(dqid, 0, "id",cdir);
+  XMLNodePointer_t meta = xml->NewChild(dqid, 0, "META");   // node with metadata
+  xml->NewChild(meta, 0, "SIMDATA", "SIMULATION");
+  xml->NewChild(meta, 0, "STARTDAY", strday);
+  xml->NewChild(meta, 0, "STARTTIME", strtime);
 
-
-
+  // same xml file
+  XMLDocPointer_t xmldoc = xml->NewDoc();
+  xml->DocSetRootElement(xmldoc, dqid);
+  // Save document to file
+  xml->SaveDoc(xmldoc, fullxml);
+  // Release memory before exit
+  xml->FreeDoc(xmldoc);
+  delete xml;
   
 }
 
