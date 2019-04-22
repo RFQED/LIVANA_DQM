@@ -562,7 +562,44 @@ void HistSvc::WriteHistsXML(){
   xml->NewChild(meta, 0, "STARTDAY", strday);
   xml->NewChild(meta, 0, "STARTTIME", strtime);
 
-  // same xml file
+
+  // colors - does not depend on the number of histograms
+  vector<TString> flags;
+  flags.push_back("Green");
+  flags.push_back("Yellow");
+  flags.push_back("Red");
+  flags.push_back("Undefined");
+
+  // bulk histograms
+  vector<TString> param;
+  TString objectName = "NA";
+  vector<TString> paramobj;
+  vector<TString> paramover;   // Can be overlapped or not with the reference dqset
+  TString objectType = "NA";
+  
+  for ( auto & map_entry : m_hists) {
+    objectName = map_entry.first;
+    param.push_back(objectName);
+    
+    objectType = map_entry.second->GetClassName();
+    paramobj.push_back(objectType);
+    
+    //if objectName ends on _Y or _N then set paramover to yes or no. 
+    //    param.push_back("pulseArea_phd");
+    //    param.push_back("peakTime_ns");
+    //    param.push_back("coincidence");
+    //
+    //    paramobj.push_back("h1");
+    //    paramobj.push_back("h1");
+    //    paramobj.push_back("h1");
+    
+    //    paramover.push_back("yes");
+    //    paramover.push_back("yes");
+    //    paramover.push_back("yes");
+  }
+
+  
+  // save xml file
   XMLDocPointer_t xmldoc = xml->NewDoc();
   xml->DocSetRootElement(xmldoc, dqid);
   // Save document to file
