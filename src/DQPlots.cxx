@@ -42,5 +42,7 @@ void DQPlots::Execute() {
 void DQPlots::Finalize() {
   // Called after event loop
   m_hists->WritePNGs();
+  m_hists->WriteHistsXML();
 }
+
 

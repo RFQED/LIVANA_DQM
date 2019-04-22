@@ -4,6 +4,7 @@
 #include <TH1F.h>
 #include <TH2F.h>
 
+// FOR PNG OUTPUTTING
 #include <TCanvas.h>
 #include <TImage.h>
 
@@ -12,6 +13,14 @@ using std::pair;
 #include <sstream>
 #include <iostream>
 #include <string>
+
+
+// FOR THE XML OUTPUTTING 
+#include <cmath>
+#include "TXMLEngine.h"
+#include <algorithm>    // std::max
+#include <ctime>
+
 
 HistSvc::HistSvc(string prefix) :
   m_cutflow(true)
@@ -519,6 +528,16 @@ void HistSvc::WritePNGs(){
     img->FromPad(c);
     img->WriteImage(histnamepng.c_str());
   }
+}
+  void HistSvc::WriteHistsXML(){
+
+    // First create engine
+    TXMLEngine* xml = new TXMLEngine;
+    // Create main node of document tree
+    XMLNodePointer_t dqid = xml->NewChild(0, 0, "DQID");
+
+
+
   
 }
 

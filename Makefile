@@ -88,14 +88,14 @@ endif
 
 ROOTCPPFLAGS = $(shell root-config --cflags) -Wno-long-long
 #ROOTCPPFLAGS = $(shell root-config --cflags) -Wno-long-long
-ROOTLDFLAGS  = $(shell root-config --libs) 
+ROOTLDFLAGS  = $(shell root-config --libs ) 
 RQLDFLAGS = rqlib/rqlib.so
 
 CPPFLAGS = $(CPPDBGFLAGS) $(CPPPROFLAGS) $(CPPOPTFLAGS) $(CPPBASEFLAGS) $(ROOTCPPFLAGS) 
 
 ARFLAGS = -rc
 
-LDFLAGS = $(ROOTLDFLAGS) -lEG -lMinuit $(RQLDFLAGS) -l TreePlayer 
+LDFLAGS = $(ROOTLDFLAGS) -lEG -lMinuit $(RQLDFLAGS) -l TreePlayer -lXMLIO # WT ADDED XMLIO TO GET XML OUTPUTx 
 
 ifeq ($(DEBUG),yes)
 override LDFLAGS += -g 

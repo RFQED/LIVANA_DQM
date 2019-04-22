@@ -5,6 +5,10 @@
 #include <TFile.h>
 #include <TTree.h>
 
+//for XML
+#include "TXMLEngine.h"
+
+
 #include <map>
 using std::map;
 #include <string>
@@ -34,9 +38,6 @@ public:
   void BookFillHist(const string& name, int nbinsx, float* xbins, float value, float weight=1);
   void BookFillHist(const string& name, int nbinsx, float xlow, float xup, int nbinsy, float ylow, float yup, float xvalue, float yvalue, float weight=1);
   void BookFillHist(const string& name, int nbinsx, float* xbins, int nbinsy, float* ybins, float xvalue,  float yvalue, float weight=1);
-
-  
-  
 
   TTree* BookTree(const string& name, const string& branchName, void* address, const std::string& leaves);
   void BookFillTree(const string& name, const string& branchName, void* address, const std::string& leaves);
@@ -78,6 +79,10 @@ public:
     m_hists[fullname]=hist;
   }
 
+  void WritePNGs();
+
+  void WriteHistsXML();
+
 private:
 
   //typedef map<string, TH1*> store_t;  
@@ -105,10 +110,11 @@ private:
   string dirName(const string name);
   string addSlash(const string& path);
 
-
   
   void split(const string& s, char delim, vector<string>& elems);
   vector<string> split(const string &s, char delim);
+
+
 };
 
 #endif
